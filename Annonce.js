@@ -1,5 +1,3 @@
-module.exports = Annonce;
-
 class Annonce {
     constructor(count, dice, palmito, first) {
         this.first = first;
@@ -22,3 +20,5 @@ class Annonce {
         return (count - 1) * 6 + this.dice;
     }
 }
+
+module.exports = Annonce;

@@ -10,7 +10,14 @@ module.exports = function(message, config) {
     const commandName = args.shift().toLowerCase();
     if (!commandAliases.includes(commandName)) return;
     // get the mentionned players
-    const players = message.mentions.users;
-    const Game = new Perudo(players, parseInt(config["diceNumber"]));
+    if (!message.mentions.users.size) {
+        message.reply("you must tag users to play with.");
+        return;
+    }
+    const players = message.mentions.users.first(message.mentions.users.size);
+    players.push(message.author);
+    const Game = new Perudo(message.guild, players, parseInt(config["diceNumber"]));
+    // start a
+    Game.startRound(config);
     return Game;
 };

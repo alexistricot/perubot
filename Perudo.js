@@ -1,9 +1,7 @@
-module.exports = Perudo;
-
 const Annonce = require("./Annonce");
 
 class Perudo {
-    constructor(players, diceNumber = 5) {
+    constructor(guild, players, diceNumber = 5) {
         // list of players still in the game (Discord.User)
         this.player = players;
         // number of players still in the game
@@ -19,7 +17,8 @@ class Perudo {
         // current player
         this.current = 0;
         // current annonce
-        this.annonce = Annonce(true);
+        this.annonce = new Annonce(true);
+        this.guild = guild;
     }
 
     roll() {
@@ -27,6 +26,12 @@ class Perudo {
         // decide if we are in palmito
         this.rolls = this.rolls.map((a) => a.map(() => Math.floor(Math.random() * 6) + 1));
         this.updateCount();
+    }
+
+    startRound(config) {
+        // start a new round
+        this.roll();
+        this.sendDice(config);
     }
 
     updateCount() {
@@ -81,10 +86,12 @@ class Perudo {
 
     sendDice(config) {
         // sends a DM to a player with their dice
-        let diceFiles;
+        let diceEmojis;
         for (const i in this.player) {
-            diceFiles = this.roll[i].map((a) => config["dice"][a]);
-            this.player[i].send("Your roll :", { files: diceFiles });
+            this.player[i].send("Rolls :");
+            diceEmojis = this.rolls[i].map((a) => config["diceEmojiID"][a - 1]);
+            diceEmojis = diceEmojis.map((a) => this.guild.emojis.cache.get(a).toString());
+            this.player[i].send(diceEmojis.reduce((a, b) => a + " " + b));
         }
     }
 
@@ -93,3 +100,5 @@ class Perudo {
         this.current = (this.current + 1) % this.nbPlayers;
     }
 }
+
+module.exports = Perudo;
