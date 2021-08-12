@@ -1,5 +1,6 @@
 const Annonce = require("./Annonce");
 const config = require("./config.json");
+const ctag = require("common-tags");
 
 class Perudo {
     constructor(guild, channel, players, diceNumber = 5) {
@@ -115,6 +116,20 @@ class Perudo {
             resultString += diceEmojis.reduce((a, b) => a + " " + b) + "\n";
         }
         this.channel.send(resultString);
+    }
+
+    notify(Bet) {
+        if (Bet.first) {
+            this.channel.send(`First play, ${this.player[this.current].toString()} to bet first.`);
+        }
+        else {
+            const previousPlayer = this.current == 0 ? this.nbPlayers - 1 : this.current - 1;
+            this.channel.send(
+                ctag.stripIndents`${this.player[previousPlayer].toString()} bet
+                ${this.guild.emojis.cache.get(config["diceEmojiID"]).toString()}, 
+                ${this.player[this.current].toString()} to play next`,
+            );
+        }
     }
 }
 

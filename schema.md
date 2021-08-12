@@ -13,7 +13,7 @@
 
 - on roll les dés `Game.roll()`
 - si on est en palmito, on envoie un message pour le dire
-- on envoie ses dés à chaque joueur *TODO* `Game.sendDice()`
+- on envoie ses dés à chaque joueur  `Game.sendDice()`
 - on envoie un message dans le général pour commencer à parier, en identifiant 
   le joueur dont c'est le tour
 - On écoute les annonces :

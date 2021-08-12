@@ -1,5 +1,5 @@
 class Annonce {
-    constructor(count, dice, palmito, first) {
+    constructor(first, count, dice, palmito) {
         this.first = first;
         if (!this.first) {
             this.count = count;
