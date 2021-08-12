@@ -9,5 +9,30 @@
         "./resources/dice_4.png",
         "./resources/dice_5.png",
         "./resources/dice_6.png"
-    ]
+    ],
+    "diceEmojis": [
+        ":dice_1:",
+        ":dice_2:",
+        ":dice_3:",
+        ":dice_4:",
+        ":dice_5:",
+        ":dice_6:"
+    ],
+    "diceEmojiNames": [
+        "dice_1",
+        "dice_2",
+        "dice_3",
+        "dice_4",
+        "dice_5",
+        "dice_6"
+    ],
+    "diceEmojiID": [
+        "875415190915666051",
+        "875415191079251989",
+        "875415191146336286",
+        "875415190970204161",
+        "875415191360258048",
+        "875415191515455579"
+    ],
+    "ID": "875324016754294804"
 }
