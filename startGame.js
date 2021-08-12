@@ -14,10 +14,17 @@ module.exports = function(message, config) {
         message.reply("you must tag users to play with.");
         return;
     }
+    // get the players
     const players = message.mentions.users.first(message.mentions.users.size);
     players.push(message.author);
-    const Game = new Perudo(message.guild, players, parseInt(config["diceNumber"]));
-    // start a
+    // initialize the game
+    const Game = new Perudo(
+        message.guild,
+        message.channel,
+        players,
+        parseInt(config["diceNumber"]),
+    );
+    // start a first round
     Game.startRound(config);
     return Game;
 };

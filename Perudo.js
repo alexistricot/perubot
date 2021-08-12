@@ -1,7 +1,8 @@
 const Annonce = require("./Annonce");
+const config = require("./config.json");
 
 class Perudo {
-    constructor(guild, players, diceNumber = 5) {
+    constructor(guild, channel, players, diceNumber = 5) {
         // list of players still in the game (Discord.User)
         this.player = players;
         // number of players still in the game
@@ -19,6 +20,7 @@ class Perudo {
         // current annonce
         this.annonce = new Annonce(true);
         this.guild = guild;
+        this.channel = channel;
     }
 
     roll() {
@@ -28,10 +30,13 @@ class Perudo {
         this.updateCount();
     }
 
-    startRound(config) {
+    startRound() {
         // start a new round
+        if (this.palmito) {
+            this.channel.send("***¡ PALMITO !***");
+        }
         this.roll();
-        this.sendDice(config);
+        this.sendDice();
     }
 
     updateCount() {
@@ -84,7 +89,7 @@ class Perudo {
         this.current = this.current % this.nbPlayers;
     }
 
-    sendDice(config) {
+    sendDice() {
         // sends a DM to a player with their dice
         let diceEmojis;
         for (const i in this.player) {
@@ -98,6 +103,18 @@ class Perudo {
     nextPlayer() {
         // move the current player to the next player
         this.current = (this.current + 1) % this.nbPlayers;
+    }
+
+    sendResults() {
+        let resultString = "",
+            diceEmojis;
+        for (const i in this.player) {
+            resultString += this.player[i] + "\n";
+            diceEmojis = this.rolls[i].map((a) => config["diceEmojiID"][a - 1]);
+            diceEmojis = diceEmojis.map((a) => this.guild.emojis.cache.get(a).toString());
+            resultString += diceEmojis.reduce((a, b) => a + " " + b) + "\n";
+        }
+        this.channel.send(resultString);
     }
 }
 
