@@ -1,6 +1,7 @@
 const Perudo = require("./Perudo");
+const config = require("./config.json");
 
-module.exports = function(message, config) {
+module.exports = function(message) {
     // get the command name and the arguments
     const prefix = config["prefix"];
     const commandAliases = config["commandAliases"];

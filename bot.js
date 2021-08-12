@@ -7,9 +7,6 @@ const startGame = require("./startGame");
 // load the bot token from .env
 dotenv.config();
 
-// load config
-const config = require("./config.json");
-
 // load a new client
 const client = new Client({
     intents: [
@@ -28,11 +25,11 @@ let Game;
 client.on("messageCreate", (message) => {
     // start a game if there isn't one
     if (!Game) {
-        Game = startGame(message, client, config);
+        Game = startGame(message);
     }
     // handle the plays
     if (Game) {
-        handlePlay(message, Game, config);
+        handlePlay(message, Game);
     }
     // print information to the console
     printMessage(message, Game);
