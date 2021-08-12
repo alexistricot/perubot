@@ -1,0 +1,28 @@
+{
+  "name": "perubot",
+  "version": "1.0.0",
+  "description": "A Discord bot to play Perudo.",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexistricot/perubot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "perudo",
+    "game"
+  ],
+  "author": "A. Tricot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexistricot/perubot/issues"
+  },
+  "homepage": "https://github.com/alexistricot/perubot#readme",
+  "dependencies": {
+    "discord": "^0.8.2"
+  }
+}

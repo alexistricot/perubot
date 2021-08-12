@@ -1,0 +1,13 @@
+{
+    "diceNumber": 5,
+    "prefix": "!",
+    "commandAliases" : ["perudo" , "palmito", "paco", "paquo", "pako", "paquito", "peru", "perubot", "leo_paul_a_un_petit_chien"],
+    "dice": [
+        "./resources/dice_1.png",
+        "./resources/dice_2.png",
+        "./resources/dice_3.png",
+        "./resources/dice_4.png",
+        "./resources/dice_5.png",
+        "./resources/dice_6.png"
+    ]
+}
