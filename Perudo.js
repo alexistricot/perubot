@@ -18,10 +18,10 @@ class Perudo {
         this.palmito = false;
         // current player
         this.current = 0;
-        // current annonce
-        this.annonce = new Annonce(true);
-        this.guild = guild;
-        this.channel = channel;
+        // current bet
+        this.bet = new Annonce(true);
+        this.guild = guild; // guild where the game takes place
+        this.channel = channel; // channel where the game takes place
     }
 
     roll() {
@@ -38,6 +38,8 @@ class Perudo {
         }
         this.roll();
         this.sendDice();
+        this.bet = new Annonce(true);
+        this.notify();
     }
 
     updateCount() {
@@ -118,15 +120,16 @@ class Perudo {
         this.channel.send(resultString);
     }
 
-    notify(Bet) {
-        if (Bet.first) {
+    notify() {
+        if (this.bet.first) {
             this.channel.send(`First play, ${this.player[this.current].toString()} to bet first.`);
         }
         else {
             const previousPlayer = this.current == 0 ? this.nbPlayers - 1 : this.current - 1;
             this.channel.send(
                 ctag.stripIndents`${this.player[previousPlayer].toString()} bet
-                ${this.guild.emojis.cache.get(config["diceEmojiID"]).toString()}, 
+                ${this.bet.count} 
+                ${this.guild.emojis.cache.get(config["diceEmojiID"][this.bet.dice]).toString()}, 
                 ${this.player[this.current].toString()} to play next`,
             );
         }
