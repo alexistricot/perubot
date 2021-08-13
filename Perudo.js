@@ -22,6 +22,8 @@ class Perudo {
         this.bet = new Annonce(true);
         this.guild = guild; // guild where the game takes place
         this.channel = channel; // channel where the game takes place
+        // notify the players
+        this.channel.send(`:dodo: Perudo game started ! :dodo:`);
     }
 
     roll() {
@@ -33,8 +35,13 @@ class Perudo {
 
     startRound() {
         // start a new round
+        // check if a player won
+        if (this.nbPlayers == 1) {
+            this.channel.send(`${this.player[0]} :crown:`);
+        }
+        // check palmito
         if (this.palmito) {
-            this.channel.send("***¡ PALMITO !***");
+            this.channel.send(":dodo: ***¡ PALMITO !*** :dodo:");
         }
         this.roll();
         this.sendDice();
@@ -61,18 +68,26 @@ class Perudo {
     }
 
     addDice(player) {
-        // add a dice for a player
-        this.dice[player] += 1;
-        this.updateRolls(player);
+        // add a dice for a player, only if we are not in duel
+        if (this.nbPlayers > 2) {
+            this.dice[player] += 1;
+            this.updateRolls(player);
+            this.player[player].send(`You won a dice, ${this.dice[player]} dice left`);
+        }
     }
 
     removeDice(player) {
         // remove a dice for a player
         const user = this.player[player];
+        // remove the dice
         this.dice[player] -= 1;
         this.updateRolls(player);
+        // notify the player
+        this.player[player].send(`You lost a dice, ${this.dice[player]} dice left`);
+        // handle losing player
         if (this.dice[player] == 0) {
             this.removePlayer(player);
+            this.channel.send(`${this.player[player].toString()} lost !`);
             return user;
         }
         else if (this.dice[player] == 1) {
@@ -112,7 +127,7 @@ class Perudo {
         let resultString = "",
             diceEmojis;
         for (const i in this.player) {
-            resultString += this.player[i] + "\n";
+            resultString += this.player[i].toString() + "\n";
             diceEmojis = this.rolls[i].map((a) => config["diceEmojiID"][a - 1]);
             diceEmojis = diceEmojis.map((a) => this.guild.emojis.cache.get(a).toString());
             resultString += diceEmojis.reduce((a, b) => a + " " + b) + "\n";
@@ -125,14 +140,18 @@ class Perudo {
             this.channel.send(`First play, ${this.player[this.current].toString()} to bet first.`);
         }
         else {
-            const previousPlayer = this.current == 0 ? this.nbPlayers - 1 : this.current - 1;
             this.channel.send(
-                ctag.stripIndents`${this.player[previousPlayer].toString()} bet
-                ${this.bet.count} 
-                ${this.guild.emojis.cache.get(config["diceEmojiID"][this.bet.dice]).toString()}, 
+                ctag.stripIndents`${this.player[this.previousPlayer()].toString()} bet\
+                ${this.bet.count} \
+                ${this.guild.emojis.cache.get(config["diceEmojiID"][this.bet.dice]).toString()}, \
                 ${this.player[this.current].toString()} to play next`,
             );
         }
+    }
+
+    previousPlayer() {
+        // return the previous player
+        return this.current == 0 ? this.nbPlayers - 1 : this.current - 1;
     }
 }
 
