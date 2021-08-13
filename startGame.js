@@ -5,7 +5,7 @@ module.exports = function(message) {
     // get the command name and the arguments
     const prefix = config["prefix"];
     const commandAliases = config["commandAliases"];
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!message.content.startsWith(prefix)) return;
     // check if the command corresponds to one of the aliases
     const args = message.content.slice(prefix.length).trim().split(" ");
     const commandName = args.shift().toLowerCase();
