@@ -7,12 +7,12 @@ module.exports = function(message, Game) {
     const content = message.content.trim().toLowerCase();
     // check the message content for keywords
     if (config["dudo"].includes(content)) {
-        dudo(Game);
+        dudo(message, Game);
     }
     else if (config["calzone"].includes(content)) {
-        calzone(Game);
+        calzone(message, Game);
     }
     else {
-        newBet(Game);
+        newBet(message, Game);
     }
 };
