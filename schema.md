@@ -30,16 +30,16 @@
     - on recommence la manche
   - Si c'est **calzone**
     - on identifie le joueur qui a calzone
+    - on envoie les rolls à tout le monde
     - on passe le joueur courant sur ce joueur
     - on check s'il a raison ou non
-    - si le nombre de 
     - si le nombre de joueurs est **> 2**:
       - on lui ajoute ou retire un dé
     - on recommence la manche
   - Si c'est une **surenchère**
     - si la surenchère est valable et qu'elle est faite par le joueur dont c'est le tour 
       - on réagit au message positivement
-      - on garde l'annonce actuelle et le joueur qui l'a faite
+      - on garde l'annonce actuelle
       - on passe le joueur courant au joueur d'après `Game.nextPlayer()`
       - on notifie le joueur d'après
       - on recommence à écouter les annonces
@@ -51,4 +51,4 @@
 - [ ] quand on retire un joueur et qu'on arrive à deux joueurs, on print que les 
   calzones ne donnent plus de dés
 - [ ] option pour être plus ou moins verbeux sur les règles
-- [ ] quand on retire un joueur et qu'on arrive à un joueur, on print qu'il a gagné
+- [x] quand on retire un joueur et qu'on arrive à un joueur, on print qu'il a gagné
