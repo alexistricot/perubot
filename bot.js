@@ -23,6 +23,7 @@ client.once("ready", () => {
 
 let Game;
 client.on("messageCreate", (message) => {
+    if (message.author.bot) return;
     // start a game if there isn't one
     if (!Game) {
         Game = startGame(message);
