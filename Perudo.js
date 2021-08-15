@@ -33,11 +33,16 @@ class Perudo {
         this.updateCount();
     }
 
+    stop() {
+        this.over = true;
+    }
+
     startRound() {
         // start a new round
         // check if a player won
         if (this.nbPlayers == 1) {
-            this.channel.send(`${this.player[0]} :crown:`);
+            this.channel.send(`${this.player[0]} won the game :crown:`);
+            return this.stop();
         }
         // check palmito
         if (this.palmito) {
