@@ -96,6 +96,7 @@ class Perudo {
         // handle losing player
         if (this.dice[player] == 0) {
             this.channel.send(`${this.player[player].toString()} lost :skull:`);
+            this.player[player].send('You lost !');
             this.removePlayer(player);
             this.palmito = false;
         }

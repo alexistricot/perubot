@@ -62,4 +62,4 @@
 - [ ] replace count as number by an emoji
 - [x] add a rule where you can not go over the initial number of dice
 - [ ] add resign command
-- [ ] notify the player that they lost
+- [x] notify the player that they lost
