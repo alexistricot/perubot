@@ -10,6 +10,9 @@ module.exports = function(message, Game) {
         console.log(`Players : ${Game.player.map((p) => p.toString())}`);
         console.log(`Current player : ${Game.player[Game.current].toString()}`);
         console.log(`Dice : ${Game.dice}`);
+        console.log(`Count ${Game.count}`);
         console.log(`Rolls : ${Game.rolls}`);
+        if (Game.Bet.first) console.log("Bet : first bet");
+        else console.log(`Bet : ${Game.Bet.count}, ${Game.Bet.dice}`);
     }
 };
