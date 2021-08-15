@@ -4,6 +4,7 @@ const printMessage = require('./printMessage');
 const handlePlay = require('./handlePlay');
 const startGame = require('./startGame');
 const resign = require('./resign');
+const help = require('./help');
 
 // load the bot token from .env
 dotenv.config();
@@ -25,6 +26,7 @@ client.once('ready', () => {
 let Game;
 client.on('messageCreate', (message) => {
     if (message.author.bot) return;
+    help(message);
     // start a game if there isn't one
     if (!Game) {
         Game = startGame(message);

@@ -36,9 +36,10 @@
     ],
     "ID": "875324016754294804",
     "dudo": ["dudo"],
-    "calzone": ["calzone"],
+    "calzone": ["calzone", "calza"],
     "thumbsup": "👍",
     "pizza": "🍕",
     "dodo": "🦤",
-    "resign": ["resign", "abandon", "end"]
+    "resign": ["resign", "abandon", "end"],
+    "help": ["help", "--help", "-h", "aide"]
 }
