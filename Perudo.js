@@ -56,7 +56,7 @@ class Perudo {
         }
         // if we are NOT in palmito, we add the pacos to the other number's counts
         if (!this.palmito) {
-            for (let i = 2; i < 7; i++) {
+            for (let i = 1; i < 7; i++) {
                 this.count[i] += this.count[0];
             }
         }
