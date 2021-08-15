@@ -52,3 +52,14 @@
   calzones ne donnent plus de dés
 - [ ] option pour être plus ou moins verbeux sur les règles
 - [x] quand on retire un joueur et qu'on arrive à un joueur, on print qu'il a gagné
+
+## Bugs
+
+- [ ] Check error of winner during dudo (happened with 2 pacos, prby error with paco count)
+- [ ] logger le résultat et l'annonce à la fin d'une manche
+- [x] arrêter la partie en cas de victoire
+- [x] enlever les tabs additionnels
+- [ ] replace count as number by an emoji
+- [ ] add a rule where you can not go over the initial number of dice
+- [ ] add resign command
+- [ ] notify the player that they lost
