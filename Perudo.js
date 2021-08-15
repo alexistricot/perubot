@@ -18,11 +18,13 @@ class Perudo {
         // current player
         this.current = 0;
         // current bet
-        this.bet = new Annonce(true);
+        this.Bet = new Annonce(true);
         this.guild = guild; // guild where the game takes place
         this.channel = channel; // channel where the game takes place
         // notify the players
         this.channel.send(`:dodo: Perudo game started ! :dodo:`);
+        // game is over
+        this.over = false;
     }
 
     roll() {
@@ -49,7 +51,7 @@ class Perudo {
         }
         this.roll();
         this.sendDice();
-        this.bet = new Annonce(true);
+        this.Bet = new Annonce(true);
         this.notify();
     }
 
@@ -83,7 +85,6 @@ class Perudo {
 
     removeDice(player) {
         // remove a dice for a player
-        const user = this.player[player];
         // remove the dice
         this.dice[player] -= 1;
         this.updateRolls(player);
@@ -94,14 +95,13 @@ class Perudo {
         if (this.dice[player] == 0) {
             this.channel.send(`${this.player[player].toString()} lost :skull:`);
             this.removePlayer(player);
-            this.channel.send(`${this.player[player].toString()} lost !`);
-            return user;
+            this.palmito = false;
         }
         else if (this.dice[player] == 1) {
             this.palmito = true;
         }
         else {
-            return null;
+            this.palmito = false;
         }
     }
 
@@ -144,7 +144,7 @@ there are **${this.count[this.Bet.dice - 1]}** ${this.diceEmoji(this.Bet.dice)}\
     }
 
     notify() {
-        if (this.bet.first) {
+        if (this.Bet.first) {
             this.channel.send(`First play, ${this.player[this.current].toString()} to bet first.`);
         }
         else {
