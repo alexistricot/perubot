@@ -55,8 +55,8 @@
 
 ## Bugs
 
-- [ ] Check error of winner during dudo (happened with 2 pacos, prby error with paco count)
-- [ ] logger le résultat et l'annonce à la fin d'une manche
+- [x] Check error of winner during dudo (happened with 2 pacos, prby error with paco count)
+- [x] logger le résultat et l'annonce à la fin d'une manche
 - [x] arrêter la partie en cas de victoire
 - [x] enlever les tabs additionnels
 - [ ] replace count as number by an emoji
