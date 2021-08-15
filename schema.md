@@ -63,3 +63,4 @@
 - [x] add a rule where you can not go over the initial number of dice
 - [x] add resign command
 - [x] notify the player that they lost
+- [ ] print help on `!perudo help`

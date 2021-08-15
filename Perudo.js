@@ -60,11 +60,11 @@ class Perudo {
     updateCount() {
         // update the count of each dice number
         for (let i = 1; i < 7; i++) {
-            this.count[i] = this.rolls.reduce((x, y) => x + y.filter((a) => a == i).length, 0);
+            this.count[i - 1] = this.rolls.reduce((x, y) => x + y.filter((a) => a == i).length, 0);
         }
         // if we are NOT in palmito, we add the pacos to the other number's counts
         if (!this.palmito) {
-            for (let i = 1; i < 7; i++) {
+            for (let i = 1; i < 6; i++) {
                 this.count[i] += this.count[0];
             }
         }
