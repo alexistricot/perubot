@@ -1,12 +1,13 @@
-const config = require("./config.json");
+const config = require('./config.json');
 
 module.exports = function(message, Game) {
     // check if the author of the message is the player whose turn it is to play
     if (!(message.author.id === Game.player[Game.current].id)) return;
-    message.react(config["dodo"]);
+    if (Game.Bet.first) return;
+    message.react(config['dodo']);
     // check if the player who dudoed won
     let winner, loser;
-    if (Game.Bet.count() > Game.count[Game.Bet.dice()]) {
+    if (Game.Bet.count > Game.count[Game.Bet.dice]) {
         // the dudo won
         winner = Game.current;
         loser = Game.previousPlayer();
