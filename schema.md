@@ -60,6 +60,6 @@
 - [x] arrêter la partie en cas de victoire
 - [x] enlever les tabs additionnels
 - [ ] replace count as number by an emoji
-- [ ] add a rule where you can not go over the initial number of dice
+- [x] add a rule where you can not go over the initial number of dice
 - [ ] add resign command
 - [ ] notify the player that they lost

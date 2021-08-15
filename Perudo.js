@@ -7,6 +7,8 @@ class Perudo {
         this.player = players;
         // number of players still in the game
         this.nbPlayers = players.length;
+        // initial number of dice, not to be surpassed
+        this.diceNumber = diceNumber;
         // number of dice left for each player
         this.dice = new Array(this.nbPlayers).fill(diceNumber);
         // current roles for each player and each of their dice
@@ -23,7 +25,7 @@ class Perudo {
         this.channel = channel; // channel where the game takes place
         // notify the players
         this.channel.send(`:dodo: Perudo game started ! :dodo:`);
-        // game is over
+        // whether game is over
         this.over = false;
     }
 
@@ -74,8 +76,8 @@ class Perudo {
     }
 
     addDice(player) {
-        // add a dice for a player, only if we are not in duel
-        if (this.nbPlayers > 2) {
+        // add a dice for a player, only if we are not in duel and they do not have all dice already
+        if (this.nbPlayers > 2 && this.dice[player] < this.diceNumber) {
             this.dice[player] += 1;
             this.updateRolls(player);
             this.player[player].send(`You won a dice, ${this.dice[player]} dice left`);
