@@ -39,5 +39,6 @@
     "calzone": ["calzone"],
     "thumbsup": "👍",
     "pizza": "🍕",
-    "dodo": "🦤"
+    "dodo": "🦤",
+    "resign": ["resign", "abandon", "end"]
 }

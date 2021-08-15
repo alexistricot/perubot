@@ -1,8 +1,9 @@
-const dotenv = require("dotenv");
-const { Client, Intents } = require("discord.js");
-const printMessage = require("./printMessage");
-const handlePlay = require("./handlePlay");
-const startGame = require("./startGame");
+const dotenv = require('dotenv');
+const { Client, Intents } = require('discord.js');
+const printMessage = require('./printMessage');
+const handlePlay = require('./handlePlay');
+const startGame = require('./startGame');
+const resign = require('./resign');
 
 // load the bot token from .env
 dotenv.config();
@@ -17,12 +18,12 @@ const client = new Client({
 });
 
 // print when ready
-client.once("ready", () => {
-    console.log("Ready!");
+client.once('ready', () => {
+    console.log('Ready!');
 });
 
 let Game;
-client.on("messageCreate", (message) => {
+client.on('messageCreate', (message) => {
     if (message.author.bot) return;
     // start a game if there isn't one
     if (!Game) {
@@ -31,6 +32,7 @@ client.on("messageCreate", (message) => {
     // handle the plays
     if (Game) {
         handlePlay(message, Game);
+        resign(message, Game);
         if (Game.over) Game = undefined;
     }
     // print information to the console
