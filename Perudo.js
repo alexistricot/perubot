@@ -1,6 +1,5 @@
-const Annonce = require("./Annonce");
-const config = require("./config.json");
-const ctag = require("common-tags");
+const Annonce = require('./Annonce');
+const config = require('./config.json');
 
 class Perudo {
     constructor(guild, channel, players, diceNumber = 5) {
@@ -46,7 +45,7 @@ class Perudo {
         }
         // check palmito
         if (this.palmito) {
-            this.channel.send(":dodo: ***¡ PALMITO !*** :dodo:");
+            this.channel.send(':dodo: ***¡ PALMITO !*** :dodo:');
         }
         this.roll();
         this.sendDice();
@@ -78,6 +77,7 @@ class Perudo {
             this.dice[player] += 1;
             this.updateRolls(player);
             this.player[player].send(`You won a dice, ${this.dice[player]} dice left`);
+            this.channel.send(`${this.player[player].toString()} won a dice`);
         }
     }
 
@@ -89,8 +89,10 @@ class Perudo {
         this.updateRolls(player);
         // notify the player
         this.player[player].send(`You lost a dice, ${this.dice[player]} dice left`);
+        this.channel.send(`${this.player[player].toString()} lost a dice`);
         // handle losing player
         if (this.dice[player] == 0) {
+            this.channel.send(`${this.player[player].toString()} lost :skull:`);
             this.removePlayer(player);
             this.channel.send(`${this.player[player].toString()} lost !`);
             return user;
@@ -116,10 +118,9 @@ class Perudo {
         // sends a DM to a player with their dice
         let diceEmojis;
         for (const i in this.player) {
-            this.player[i].send("Rolls :");
-            diceEmojis = this.rolls[i].map((a) => config["diceEmojiID"][a - 1]);
-            diceEmojis = diceEmojis.map((a) => this.guild.emojis.cache.get(a).toString());
-            this.player[i].send(diceEmojis.reduce((a, b) => a + " " + b));
+            this.player[i].send('Rolls :');
+            diceEmojis = this.rolls[i].map((a) => this.diceEmoji(a));
+            this.player[i].send(diceEmojis.reduce((a, b) => a + ' ' + b));
         }
     }
 
@@ -129,14 +130,16 @@ class Perudo {
     }
 
     sendResults() {
-        let resultString = "",
+        let resultString = '',
             diceEmojis;
         for (const i in this.player) {
-            resultString += this.player[i].toString() + "\n";
-            diceEmojis = this.rolls[i].map((a) => config["diceEmojiID"][a - 1]);
+            resultString += this.player[i].toString() + '\n';
+            diceEmojis = this.rolls[i].map((a) => config['diceEmojiID'][a - 1]);
             diceEmojis = diceEmojis.map((a) => this.guild.emojis.cache.get(a).toString());
-            resultString += diceEmojis.reduce((a, b) => a + " " + b) + "\n";
+            resultString += diceEmojis.reduce((a, b) => a + ' ' + b) + '\n';
         }
+        resultString += `Bet was **${this.Bet.count}** ${this.diceEmoji(this.Bet.dice)}, \
+there are **${this.count[this.Bet.dice - 1]}** ${this.diceEmoji(this.Bet.dice)}\n`;
         this.channel.send(resultString);
     }
 
@@ -145,13 +148,15 @@ class Perudo {
             this.channel.send(`First play, ${this.player[this.current].toString()} to bet first.`);
         }
         else {
-            this.channel.send(
-                ctag.stripIndents`${this.player[this.previousPlayer()].toString()} bet\
-                ${this.bet.count} \
-                ${this.guild.emojis.cache.get(config["diceEmojiID"][this.bet.dice]).toString()}, \
-                ${this.player[this.current].toString()} to play next`,
-            );
+            this.channel.send(`${this.player[this.previousPlayer()].toString()} bet \
+**${this.Bet.count}** \
+${this.diceEmoji(this.Bet.dice)}, \
+${this.player[this.current].toString()} to play next`);
         }
+    }
+
+    diceEmoji(dice) {
+        return this.guild.emojis.cache.get(config['diceEmojiID'][dice - 1]).toString();
     }
 
     previousPlayer() {
