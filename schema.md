@@ -59,8 +59,8 @@
 - [x] logger le résultat et l'annonce à la fin d'une manche
 - [x] arrêter la partie en cas de victoire
 - [x] enlever les tabs additionnels
-- [ ] replace count as number by an emoji
+- [c] replace count as number by an emoji
 - [x] add a rule where you can not go over the initial number of dice
 - [x] add resign command
 - [x] notify the player that they lost
-- [ ] print help on `!perudo help`
+- [x] print help on `!perudo help`
