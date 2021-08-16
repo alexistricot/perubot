@@ -24,6 +24,7 @@ module.exports = function(message, Game) {
     );
     // set the current player to the loser and remove a dice
     Game.current = loser;
+    Game.palmito = false; // reset palmito
     Game.removeDice(loser);
     Game.startRound();
 };

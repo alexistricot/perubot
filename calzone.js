@@ -15,6 +15,7 @@ module.exports = function(message, Game) {
     Game.sendResults();
     // set the current player to the calzoner, he will start no matter what happens
     Game.current = calzoner;
+    Game.palmito = false;
     // check if the player won
     if (Game.Bet.count == Game.count[Game.Bet.dice]) {
         // calzoner won
