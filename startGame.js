@@ -20,10 +20,10 @@ module.exports = function(message) {
     // get the players
     const players = message.mentions.users.first(message.mentions.users.size);
     players.push(message.author);
+    // get the guild with custom emojis
     // initialize the game
     const Game = new Perudo(
-        message.guild,
-        message.channel,
+        message,
         players,
         parseInt(config['diceNumber']),
     );
