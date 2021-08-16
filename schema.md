@@ -64,4 +64,5 @@
 - [x] add resign command
 - [x] notify the player that they lost
 - [x] print help on `!perudo help`
-- [ ] emojis only work in the guild where there were originally added
+- [x] custom emojis only work in the guild where there were originally added
+- [ ] during palmito, the player not in palmito calzones and wins and the game stays in palmito
