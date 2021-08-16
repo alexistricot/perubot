@@ -41,5 +41,6 @@
     "pizza": "🍕",
     "dodo": "🦤",
     "resign": ["resign", "abandon", "end"],
-    "help": ["help", "--help", "-h", "aide"]
+    "help": ["help", "--help", "-h", "aide"],
+    "emojiGuildID" : "266607703168778261"
 }

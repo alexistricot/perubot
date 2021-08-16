@@ -2,7 +2,7 @@ const Annonce = require('./Annonce');
 const config = require('./config.json');
 
 class Perudo {
-    constructor(guild, channel, players, diceNumber = 5) {
+    constructor(message, players, diceNumber = 5) {
         // list of players still in the game (Discord.User)
         this.player = players;
         // number of players still in the game
@@ -21,8 +21,9 @@ class Perudo {
         this.current = 0;
         // current bet
         this.Bet = new Annonce(true);
-        this.guild = guild; // guild where the game takes place
-        this.channel = channel; // channel where the game takes place
+        this.guild = message.guild; // guild where the game takes place
+        this.emojiGuild = message.client.guilds.cache.get(config["emojiGuildID"]); 
+        this.channel = message.channel; // channel where the game takes place
         // notify the players
         this.channel.send(`:dodo: Perudo game started ! :dodo:`);
         // whether game is over
@@ -137,8 +138,7 @@ class Perudo {
             diceEmojis;
         for (const i in this.player) {
             resultString += this.player[i].toString() + '\n';
-            diceEmojis = this.rolls[i].map((a) => config['diceEmojiID'][a - 1]);
-            diceEmojis = diceEmojis.map((a) => this.guild.emojis.cache.get(a).toString());
+            diceEmojis = this.rolls[i].map((a) => this.diceEmoji(a));
             resultString += diceEmojis.reduce((a, b) => a + ' ' + b) + '\n';
         }
         resultString += `Bet was **${this.Bet.count}** ${this.diceEmoji(this.Bet.dice)}, \
@@ -159,7 +159,7 @@ ${this.player[this.current].toString()} to play next`);
     }
 
     diceEmoji(dice) {
-        return this.guild.emojis.cache.get(config['diceEmojiID'][dice - 1]).toString();
+        return this.emojiGuild.emojis.cache.get(config['diceEmojiID'][dice - 1]).toString();
     }
 
     previousPlayer() {
