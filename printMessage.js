@@ -2,7 +2,7 @@ const ctag = require("common-tags");
 
 module.exports = function(message, Game) {
     console.log(ctag.stripIndents`Message from ${message.author.username}\
-     on ${message.channel.topic}: ${message.content}`);
+     on ${message.guild.name}@${message.channel.id}: ${message.content}`);
     // eslint-disable-next-line no-constant-condition
     console.log(`Game ${Game ? "on" : "off"}`);
     if (Game) {
