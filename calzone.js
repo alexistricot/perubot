@@ -17,7 +17,7 @@ module.exports = function(message, Game) {
     Game.current = calzoner;
     Game.palmito = false;
     // check if the player won
-    if (Game.Bet.count == Game.count[Game.Bet.dice]) {
+    if (Game.Bet.count == Game.count[Game.Bet.dice - 1]) {
         // calzoner won
         Game.addDice(calzoner);
     }

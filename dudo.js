@@ -7,7 +7,7 @@ module.exports = function(message, Game) {
     message.react(config['dodo']);
     // check if the player who dudoed won
     let winner, loser;
-    if (Game.Bet.count > Game.count[Game.Bet.dice]) {
+    if (Game.Bet.count > Game.count[Game.Bet.dice - 1]) {
         // the dudo won
         winner = Game.current;
         loser = Game.previousPlayer();
