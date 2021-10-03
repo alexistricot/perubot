@@ -18,15 +18,13 @@ module.exports = function(message) {
         return;
     }
     // get the players
-    const players = message.mentions.users.first(message.mentions.users.size);
+    const players = message.mentions.users.first(message.mentions.users.size).filter((p) => {
+        return p.id != message.author.id;
+    });
     players.push(message.author);
     // get the guild with custom emojis
     // initialize the game
-    const Game = new Perudo(
-        message,
-        players,
-        parseInt(config['diceNumber']),
-    );
+    const Game = new Perudo(message, players, parseInt(config['diceNumber']));
     // start a first round
     Game.startRound(config);
     return Game;
