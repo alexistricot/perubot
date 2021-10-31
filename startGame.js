@@ -1,19 +1,12 @@
 const Perudo = require('./Perudo');
 const config = require('./config.json');
 
-module.exports = function(message) {
+module.exports = function (interaction) {
     // get the command name and the arguments
-    const prefix = config['prefix'];
-    const commandAliases = config['commandAliases'];
-    if (!message.content.startsWith(prefix)) return;
-    // check if the command corresponds to one of the aliases
-    const args = message.content.slice(prefix.length).trim().split(' ');
-    const commandName = args.shift().toLowerCase();
-    if (!commandAliases.includes(commandName)) return;
-    // return if we are printing the help
-    if (config['help'].includes(args[0])) return;
+    const commandName = interaction.commandName;
     // get the mentionned players
-    if (!message.mentions.users.size) {
+    const players = interaction.options.resolved?.members;
+    if (!interaction.mentions.users.size) {
         message.reply('you must tag users to play with.');
         return;
     }
