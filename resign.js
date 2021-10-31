@@ -1,17 +1,6 @@
 const config = require('./config.json');
 
-module.exports = function(message, Game) {
-    // get the command name and the arguments
-    const prefix = config['prefix'];
-    const commandAliases = config['commandAliases'];
-    if (!message.content.startsWith(prefix)) return;
-    // check if the command corresponds to one of the aliases
-    const args = message.content.slice(prefix.length).trim().split(' ');
-    const commandName = args.shift().toLowerCase();
-    if (!commandAliases.includes(commandName)) return;
-    // check if we are resigning
-    if (args.length < 1) return;
-    if (!config['resign'].includes(args[0])) return;
+module.exports = function(interaction, Game) {
     Game.over = true;
     Game.channel.send(`${message.author.toString()} resigned, game ended.`);
     for (const i in Game.player) {

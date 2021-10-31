@@ -1,12 +1,7 @@
-// export a function which adds a point to a player in ranking.json
-// export a function that adds a loss to a player in ranking.json
-// export a function which prints the ranking in ranking.json
-// export a function that initializes ranking.json if it does not exist
-
 const fs = require('fs');
 
 module.exports = {
-    addPoint: addWin,
+    addWin: addWin,
     addLoss: addLoss,
     printRanking: printRanking,
     initRanking: initRanking,
@@ -31,7 +26,29 @@ function addWin(player) {
     });
 }
 
-function printRanking(interaction) {}
+function printRanking(interaction) {
+    fs.readFile('./ranking.json', (err, data) => {
+        if (err) return console.error(err);
+        const ranking = JSON.parse(data);
+        const players = Object.keys(ranking);
+        const output = ':crown: ***Ranking*** :crown:\n\n';
+        for (const p in players) {
+            const player = players[p];
+            // add medals to the first three players
+            if (p == 0) output += ':first_place:';
+            else if (p == 1) output += ':second_place:';
+            else if (p == 2) output += ':third_place:';
+            // add the score of the player to the current line
+            output += `**${player}** `;
+            output += `${ranking['win'][player]} - ${ranking['loss'][player]} `;
+            output += `(${
+                (100 * ranking['win'][player]) / (ranking['loss'][player] + ranking['win'][player])
+            } %)`;
+            output += '\n';
+        }
+        reply(interaction, output);
+    });
+}
 
 function addLoss(player) {
     fs.readFile('./ranking.js', (err, content) => {
@@ -57,4 +74,14 @@ function initRanking() {
         const ranking = { win: [], loss: [] };
         fs.writeFile('./ranking.json', ranking, console.error);
     }
+}
+
+function reply(interaction, message) {
+    if (interaction.replied) {
+        interaction.editReply(message);
+    }
+    else {
+        interaction.reply(message);
+    }
+    console.log(message);
 }

@@ -61,6 +61,7 @@ client.on('interactionCreate', (interaction) => {
         }
         break;
     case 'perudo-ranking':
+        interaction.reply('`Working...`');
         printRanking(interaction);
         break;
     default:

@@ -4,7 +4,7 @@ const config = require('./config.json');
 module.exports = function(interaction) {
     // get the mentioned players, without the author
     const players = interaction.options.resolved?.members.filter((p) => {
-        return p.id != interaction.member.id;
+        return p.id != interaction.member.id && !p.bot;
     });
     if (!players.length) {
         interaction.reply('you must tag users to play with.');
@@ -18,7 +18,3 @@ module.exports = function(interaction) {
     Game.startRound(config);
     return Game;
 };
-
-function getMember(user, guild) {
-    return guild.members.cache.find((m) => m.user.id == user.id);
-}
