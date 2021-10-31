@@ -6,6 +6,7 @@ const startGame = require('./startGame');
 const resign = require('./resign');
 const dotenv = require('dotenv');
 const help = require('./help');
+const declareCommands = require('./declareCommands');
 
 // load the bot token from .env
 dotenv.config();
@@ -24,6 +25,8 @@ client.once('ready', () => {
     console.log('Ready!');
     // initialize the ranking system
     initRanking();
+    // declare the commands
+    declareCommands();
 });
 
 let Game;
