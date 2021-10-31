@@ -1,24 +1,24 @@
 const Perudo = require('./Perudo');
 const config = require('./config.json');
 
-module.exports = function (interaction) {
-    // get the command name and the arguments
-    const commandName = interaction.commandName;
-    // get the mentionned players
-    const players = interaction.options.resolved?.members;
-    if (!interaction.mentions.users.size) {
-        message.reply('you must tag users to play with.');
+module.exports = function(interaction) {
+    // get the mentioned players, without the author
+    const players = interaction.options.resolved?.members.filter((p) => {
+        return p.id != interaction.member.id;
+    });
+    if (!players.length) {
+        interaction.reply('you must tag users to play with.');
         return;
     }
-    // get the players
-    const players = message.mentions.users.first(message.mentions.users.size).filter((p) => {
-        return p.id != message.author.id;
-    });
-    players.push(message.author);
-    // get the guild with custom emojis
+    // add the author to the game
+    players.push(interaction.member);
     // initialize the game
-    const Game = new Perudo(message, players, parseInt(config['diceNumber']));
+    const Game = new Perudo(interaction, players, parseInt(config['diceNumber']));
     // start a first round
     Game.startRound(config);
     return Game;
 };
+
+function getMember(user, guild) {
+    return guild.members.cache.find((m) => m.user.id == user.id);
+}
