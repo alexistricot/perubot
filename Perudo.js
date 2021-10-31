@@ -2,7 +2,7 @@ const Annonce = require('./Annonce');
 const config = require('./config.json');
 
 class Perudo {
-    constructor(message, players, diceNumber = 5) {
+    constructor(interaction, players, diceNumber = 5) {
         // list of players still in the game (Discord.User)
         this.player = players;
         // number of players still in the game
@@ -21,9 +21,9 @@ class Perudo {
         this.current = 0;
         // current bet
         this.Bet = new Annonce(true);
-        this.guild = message.guild; // guild where the game takes place
-        this.emojiGuild = message.client.guilds.cache.get(config["emojiGuildID"]); 
-        this.channel = message.channel; // channel where the game takes place
+        this.guild = interaction.guild; // guild where the game takes place
+        this.emojiGuild = interaction.client.guilds.cache.get(config['emojiGuildID']);
+        this.channel = interaction.channel; // channel where the game takes place
         // notify the players
         this.channel.send(`:dodo: Perudo game started ! :dodo:`);
         // whether game is over
