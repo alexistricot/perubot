@@ -36,7 +36,6 @@ client.on('messageCreate', (message) => {
     // handle the plays
     if (Game) {
         handlePlay(message, Game);
-        resign(message, Game);
         if (Game.over) Game = undefined;
     }
     // print information to the console
