@@ -1,10 +1,8 @@
-const config = require('./config.json');
-
 module.exports = function(interaction, Game) {
     Game.over = true;
-    Game.channel.send(`${message.author.toString()} resigned, game ended.`);
+    Game.channel.send(`${interaction.member.toString()} resigned, game ended.`);
     for (const i in Game.player) {
-        Game.player[i].send(`${message.author.toString()} resigned, game ended.`);
+        Game.player[i].send(`${interaction.member.toString()} resigned, game ended.`);
     }
     const maxDice = maxargmax(Game.dice)[0];
     for (const i in Game.player) {

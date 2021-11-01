@@ -43,7 +43,7 @@ client.on('messageCreate', (message) => {
     printMessage(message, Game);
 });
 
-client.on('interactionCreate', (interaction) => {
+client.on('interactionCreate', async (interaction) => {
     // check the interaction
     if (interaction.user.bot) return;
     if (!interaction.isCommand()) return;
@@ -64,7 +64,7 @@ client.on('interactionCreate', (interaction) => {
         }
         break;
     case 'perudo-ranking':
-        interaction.reply('`Working...`');
+        await interaction.reply('`Working...`');
         printRanking(interaction);
         break;
     default:

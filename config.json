@@ -1,7 +1,17 @@
 {
     "diceNumber": 5,
     "prefix": "!",
-    "commandAliases" : ["perudo" , "palmito", "paco", "paquo", "pako", "paquito", "peru", "perubot", "leo_paul_a_un_petit_chien"],
+    "commandAliases": [
+        "perudo",
+        "palmito",
+        "paco",
+        "paquo",
+        "pako",
+        "paquito",
+        "peru",
+        "perubot",
+        "leo_paul_a_un_petit_chien"
+    ],
     "dice": [
         "./resources/dice_1.png",
         "./resources/dice_2.png",
@@ -10,22 +20,8 @@
         "./resources/dice_5.png",
         "./resources/dice_6.png"
     ],
-    "diceEmojis": [
-        ":dice_1:",
-        ":dice_2:",
-        ":dice_3:",
-        ":dice_4:",
-        ":dice_5:",
-        ":dice_6:"
-    ],
-    "diceEmojiNames": [
-        "dice_1",
-        "dice_2",
-        "dice_3",
-        "dice_4",
-        "dice_5",
-        "dice_6"
-    ],
+    "diceEmojis": [":dice_1:", ":dice_2:", ":dice_3:", ":dice_4:", ":dice_5:", ":dice_6:"],
+    "diceEmojiNames": ["dice_1", "dice_2", "dice_3", "dice_4", "dice_5", "dice_6"],
     "diceEmojiID": [
         "875415190915666051",
         "875415191079251989",
@@ -42,5 +38,8 @@
     "dodo": "🦤",
     "resign": ["resign", "abandon", "end"],
     "help": ["help", "--help", "-h", "aide"],
-    "emojiGuildID" : "266607703168778261"
+    "emojiGuildID": "266607703168778261",
+    "clientID": "875324016754294804",
+    "guild": "689531201983479828",
+    "maxPlayers": 10
 }

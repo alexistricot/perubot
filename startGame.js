@@ -3,10 +3,13 @@ const config = require('./config.json');
 
 module.exports = function(interaction) {
     // get the mentioned players, without the author
-    const players = interaction.options.resolved?.members.filter((p) => {
-        return p.id != interaction.member.id && !p.bot;
-    });
-    if (!players.length) {
+    console.log(interaction.options.data);
+    const players = interaction.options.data
+        .map((x) => x.member)
+        .filter((p) => {
+            return p.id != interaction.member.id && !p.bot;
+        });
+    if (!players || !players.length) {
         interaction.reply('you must tag users to play with.');
         return;
     }

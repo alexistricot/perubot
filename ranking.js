@@ -22,16 +22,17 @@ function addWin(player) {
         if (Object.keys(ranking['loss']).includes(player.name)) {
             ranking['loss'][player.name] = 0;
         }
-        fs.writeFile('./ranking.json', ranking, console.error);
+        fs.writeFile('./ranking.json', JSON.stringify(ranking), console.error);
     });
 }
 
-function printRanking(interaction) {
+async function printRanking(interaction) {
     fs.readFile('./ranking.json', (err, data) => {
         if (err) return console.error(err);
         const ranking = JSON.parse(data);
-        const players = Object.keys(ranking);
-        const output = ':crown: ***Ranking*** :crown:\n\n';
+        const players = Object.keys(ranking['win']);
+        if (!players.length) return reply(interaction, 'No records.');
+        let output = ':crown: ***Ranking*** :crown:\n\n';
         for (const p in players) {
             const player = players[p];
             // add medals to the first three players
@@ -65,14 +66,14 @@ function addLoss(player) {
         if (Object.keys(ranking['win']).includes(player.name)) {
             ranking['win'][player.name] = 0;
         }
-        fs.writeFile('./ranking.json', ranking, console.error);
+        fs.writeFile('./ranking.json', JSON.stringify(ranking), console.error);
     });
 }
 
 function initRanking() {
     if (!fs.existsSync('./ranking.json')) {
-        const ranking = { win: [], loss: [] };
-        fs.writeFile('./ranking.json', ranking, console.error);
+        const ranking = { win: {}, loss: {} };
+        fs.writeFile('./ranking.json', JSON.stringify(ranking), console.error);
     }
 }
 
