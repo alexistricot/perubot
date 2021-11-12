@@ -4,27 +4,31 @@ A Discord bot to play Perudo.
 
 # Commands
 
-Commands adressed to this bot must be prefixed by one of the following :
-`!perudo`, `!palmito`, `!paco`, `!paquo`, `!pako`, `!paquito`, `!peru`, `!perubot`, `!leo_paul_a_un_petit_chien`.
+This bot declares the following commands usable in the Discord client:
+
+- `/perudo <user1> <user2> ...`: start a game of perudo.
+- `/perudo-resign`: resign the current game.
+- `/perudo-help`: print an help message.
+- `/perudo-ranking`: get a ranking of all players.
+
 
 ## Start a game
 
 Start a game by adressing a command to the bot and tagging the players to include
-in the game. Example : `!perudo @user1 @user2` will start a game with players user1, user2 and the author of the message.
+in the game. Example : `/perudo <user1> <user2>` will start a game with players 
+*user1*, *user2* and the author of the message.
 
 Only one game can run at a time, even on different servers.
 
 ## End a game
 
-End a game by providing one of the following commands to the bot : `resign`, `abandon`, `end`. This ends the game for all players.
-Example : `!perudo resign`
+End a game by using the `/perudo-resign` command.
+This ends the game for all players.
+This does not affect ranking. 
 
 ## Print this help message
 
-Print help by providing one of the following command to the bot : 
-`help`, `--help`, `-h`, `aide`.
-Example : `!perudo -h`
-
+Print help by using the `/perudo-help` command.
 # Play the game
 
 You play the game by typing directly in the channel where the game was started.
