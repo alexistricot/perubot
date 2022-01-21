@@ -8,20 +8,21 @@ module.exports = {
 };
 
 function addWin(player) {
-    fs.readFile('./ranking.js', (err, content) => {
+    fs.readFile('./ranking.json', (err, content) => {
         if (err) return console.error(err);
         const ranking = JSON.parse(content);
         // Check if new player and add a win
-        if (Object.keys(ranking['win']).includes(player.name)) {
-            ranking['win'][player.name] += 1;
+        if (Object.keys(ranking['win']).includes(player.user.username)) {
+            ranking['win'][player.user.username] += 1;
         }
         else {
-            ranking['win'][player.name] = 1;
+            ranking['win'][player.user.username] = 1;
         }
         // check if player exists in losses too
-        if (Object.keys(ranking['loss']).includes(player.name)) {
-            ranking['loss'][player.name] = 0;
+        if (~Object.keys(ranking['loss']).includes(player.user.username)) {
+            ranking['loss'][player.user.username] = 0;
         }
+        console.log(ranking);
         fs.writeFile('./ranking.json', JSON.stringify(ranking), console.error);
     });
 }
@@ -52,19 +53,19 @@ async function printRanking(interaction) {
 }
 
 function addLoss(player) {
-    fs.readFile('./ranking.js', (err, content) => {
+    fs.readFile('./ranking.json', (err, content) => {
         if (err) return console.error(err);
         const ranking = JSON.parse(content);
         // check if new player and add a loss
-        if (Object.keys(ranking['loss']).includes(player.name)) {
-            ranking['loss'][player.name] += 1;
+        if (Object.keys(ranking['loss']).includes(player.user.username)) {
+            ranking['loss'][player.user.username] += 1;
         }
         else {
-            ranking['loss'][player.name] = 1;
+            ranking['loss'][player.user.username] = 1;
         }
         // check if player exists in wins too
-        if (Object.keys(ranking['win']).includes(player.name)) {
-            ranking['win'][player.name] = 0;
+        if (~Object.keys(ranking['win']).includes(player.user.username)) {
+            ranking['win'][player.user.username] = 0;
         }
         fs.writeFile('./ranking.json', JSON.stringify(ranking), console.error);
     });

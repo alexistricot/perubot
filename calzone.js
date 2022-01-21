@@ -1,4 +1,4 @@
-const config = require("./config.json");
+const config = require('./config.json');
 
 module.exports = function(message, Game) {
     // get the player who calzoned
@@ -10,7 +10,7 @@ module.exports = function(message, Game) {
     // calzoner can NOT be the previous player
     if (calzoner == Game.previousPlayer()) return;
     // calzone was valid
-    message.react(config["pizza"]);
+    message.react(config['pizza']);
     // send the results to the channel
     Game.sendResults();
     // set the current player to the calzoner, he will start no matter what happens

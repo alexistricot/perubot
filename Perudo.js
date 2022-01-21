@@ -47,7 +47,7 @@ class Perudo {
         // check if a player won
         if (this.nbPlayers == 1) {
             this.channel.send(`${this.player[0]} won the game :crown:`);
-            addWin(this.players[0]);
+            addWin(this.player[0]);
             return this.stop();
         }
         // check palmito
@@ -113,7 +113,7 @@ class Perudo {
 
     removePlayer(player) {
         // remove a player from the game
-        addLoss(this.players[player]);
+        addLoss(this.player[player]);
         this.nbPlayers -= 1;
         this.player.splice(player, 1);
         this.dice.splice(player, 1);
