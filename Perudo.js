@@ -2,6 +2,8 @@ const Annonce = require('./Annonce');
 const config = require('./config.json');
 const { addLoss, addWin } = require('./ranking');
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 class Perudo {
     constructor(interaction, players, diceNumber = 5) {
         // list of players still in the game (Discord.User)
@@ -42,11 +44,12 @@ class Perudo {
         this.over = true;
     }
 
-    startRound() {
+    async startRound() {
         // start a new round
         // check if a player won
         if (this.nbPlayers == 1) {
             this.channel.send(`${this.player[0]} won the game :crown:`);
+            await delay(500);
             addWin(this.player[0]);
             return this.stop();
         }
