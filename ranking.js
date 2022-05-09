@@ -31,9 +31,10 @@ function printRanking(interaction) {
         if (err) return console.error(err);
         const ranking = JSON.parse(data);
         const players = Object.keys(ranking);
+        const sortedPlayers = orderedPlayers(ranking, players);
         const output = ':crown: ***Ranking*** :crown:\n\n';
-        for (const p in players) {
-            const player = players[p];
+        for (const p in sortedPlayers) {
+            const player = sortedPlayers[p];
             // add medals to the first three players
             if (p == 0) output += ':first_place:';
             else if (p == 1) output += ':second_place:';
@@ -84,4 +85,13 @@ function reply(interaction, message) {
         interaction.reply(message);
     }
     console.log(message);
+}
+
+function orderedPlayers(ranking, players) {
+    // get the winrate for each player
+    const winrate = players.map((p) => ranking.win[p] / (ranking.loss[p] + ranking.win[p]));
+    // return a new array with players sorted based on their winrate (highest winrate first)
+    return players
+        .slice()
+        .sort((a, b) => winrate[players.indexOf(b)] - winrate[players.indexOf(a)]);
 }
