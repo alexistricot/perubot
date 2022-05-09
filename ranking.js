@@ -31,11 +31,13 @@ async function printRanking(interaction) {
     fs.readFile('./ranking.json', (err, data) => {
         if (err) return console.error(err);
         const ranking = JSON.parse(data);
-        const players = Object.keys(ranking);
+        const players = Object.keys(ranking.win);
         const sortedPlayers = orderedPlayers(ranking, players);
-        const output = ':crown: ***Ranking*** :crown:\n\n';
+        console.log(`sortedPlayers: ${sortedPlayers}`);
+        let output = ':crown: ***Ranking*** :crown:\n\n';
         for (const p in sortedPlayers) {
             const player = sortedPlayers[p];
+            console.log(`player: ${player}`);
             // add medals to the first three players
             if (p == 0) output += ':first_place:';
             else if (p == 1) output += ':second_place:';
